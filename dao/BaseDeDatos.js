@@ -27,17 +27,6 @@ class BaseDeDatos {
                     });
     }
 
-    async attendance_email_exists(email) {
-        return this.attendanceModel
-                    .findOne({ email: email })
-                    .select("email")
-                    .lean()
-                    .then(result => {
-                        console.log(result);
-                        return result != null;
-                    });
-    }
-
     async add_student(email, name, image) {
         if (await this.student_email_exists(email)){
             console.log("Error: " + email + " ya existe.");
@@ -52,11 +41,6 @@ class BaseDeDatos {
     }
 
     async add_attendance(email, date, course, image) {
-        if (await this.attendance_email_exists(email)){
-            console.log("Error: " + email + " ya existe.");
-            throw new ErrorEmailAlreadyExists();
-        }
-        
         console.log("Asistencia nueva, se agrega a la lista.");
         const obj = JSON.stringify({email: email, date: date, course: course, image:image});
         const attendance_structure = new this.attendanceModel(JSON.parse(obj));
