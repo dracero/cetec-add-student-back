@@ -28,10 +28,10 @@ class BaseDeDatos {
     }
 
     async add_student(email, name, image) {
-        if (await this.student_email_exists(email)){
+        /*if (await this.student_email_exists(email)){
             console.log("Error: " + email + " ya existe.");
             throw new ErrorEmailAlreadyExists();
-        }
+        }*/
         
         console.log("Alumno nuevo, se agrega a la lista.");
         const obj = JSON.stringify({email: email, name: name, image:image});
